@@ -2,7 +2,7 @@ import RotatingText from "./RotatingText";
 
 const tags = ["硬核技术爱好者", "独立博客作者", "一名初中生", "极简主义"];
 
-const pursuitWords = ["歌颂", "感受", "生活", "体验学习"];
+const pursuitWords = ["歌颂", "感受", "生活", "体验", "学习"];
 
 export default function About() {
   return (

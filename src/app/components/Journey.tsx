@@ -1,6 +1,6 @@
 const careers = [
   { key: "EDU", title: "江北中学 · 初中生", desc: "在读，初三" },
-  { key: "自托管", title: "17 个自建服务", desc: "从博客到密码管理器" },
+  { key: "自托管", title: "1N 个自建服务", desc: "从博客到 Cheymin Music" },
   { key: "折腾", title: "固件 / 设备破解", desc: "词典笔、路由器刷机" },
 ];
 
@@ -8,7 +8,6 @@ const info = [
   { k: "我现在住在", v: "中国，重庆市北碚区" },
   { k: "单位", v: "重庆江北中学" },
   { k: "职业", v: "初三学生" },
-  { k: "日常", v: "每天坚持写日记" },
 ];
 
 const services = [
@@ -55,23 +54,11 @@ export default function Journey() {
           ))}
         </div>
 
-        {/* 自有设备 */}
-        <div className="card d1 mt-5 flex flex-col gap-5 md:flex-row md:items-center md:justify-between" data-reveal="right">
-          <div>
-            <p className="eyebrow">DEVICES</p>
-            <p className="mt-2 text-lg font-bold">有道词典笔 A6 Pro（已破解）、华为手环 8</p>
-            <p className="lead mt-1 text-sm">
-              没有自己的手机和电脑，但并不妨碍折腾——设备少，照样把生态搭起来。
-            </p>
-          </div>
-          <span className="chip chip--accent shrink-0">全部白嫖来的</span>
-        </div>
-
         {/* 自建服务：横向滚动 */}
         <div className="mt-10" data-reveal>
           <div className="mb-4 flex items-end justify-between gap-4">
             <p className="eyebrow">SELF-HOSTED · 维护中的自建服务</p>
-            <span className="mono accent text-sm">17+</span>
+            <span className="mono accent text-sm">1N+</span>
           </div>
           <div className="marquee-mask">
             <div className="marquee">

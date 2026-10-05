@@ -27,7 +27,7 @@
 }
 
 /* ===== 基础 ===== */
-html { color-scheme: dark; scroll-behavior: smooth; }
+html { color-scheme: dark; scroll-behavior: smooth; font-size: 17px; }
 html, body {
   background: var(--color-bg);
   color: var(--color-text);
@@ -90,20 +90,20 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
 }
 
 /* ===== 布局 ===== */
-.shell { width: 100%; max-width: 1180px; margin-inline: auto; padding-inline: 24px }
-.section { position: relative; z-index: 1; padding-block: 72px }
-@media (min-width: 768px) { .section { padding-block: 104px } }
+.shell { width: 100%; max-width: 1720px; margin-inline: auto; padding-inline: clamp(20px, 4.5vw, 80px) }
+.section { position: relative; z-index: 1; padding-block: 88px }
+@media (min-width: 768px) { .section { padding-block: 132px } }
 
 /* ===== 卡片 / 玻璃质感 ===== */
 .card {
   position: relative;
-  border-radius: 16px;
-  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  border: 1px solid transparent;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015));
+    linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .01));
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  padding: 28px;
+  padding: 32px;
   transition: border-color .35s ease, transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease;
 }
 .card:hover {
@@ -118,7 +118,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   border-color: var(--color-border-accent);
 }
 .card--flush { padding: 0; overflow: hidden }
-.card--pad-lg { padding: 36px }
+.card--pad-lg { padding: 44px }
 
 /* ===== 文字 ===== */
 .eyebrow {
@@ -132,16 +132,16 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   font-weight: 800;
   letter-spacing: -.02em;
   line-height: 1.12;
-  font-size: clamp(1.6rem, 3.6vw, 2.35rem);
+  font-size: clamp(1.85rem, 4vw, 2.8rem);
 }
 .h-hero {
   font-weight: 800;
   letter-spacing: -.03em;
-  line-height: 1.06;
-  font-size: clamp(2.3rem, 6.2vw, 4.1rem);
+  line-height: 1.05;
+  font-size: clamp(2.6rem, 7vw, 5.1rem);
 }
 .accent { color: var(--color-accent) }
-.lead { color: var(--color-muted); font-size: 1.02rem }
+.lead { color: var(--color-muted); font-size: 1.08rem }
 
 /* ===== 标签 ===== */
 .chip {
