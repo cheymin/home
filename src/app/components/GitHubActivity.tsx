@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 type Day = { date: string; count: number; level: number };
 
-const RECENT_DAYS = 300; // 约 10 个月
+const RECENT_DAYS = 365; // 近一年
 
 function buildWeeks(days: Day[]) {
   if (days.length === 0) return [] as (Day | null)[][];
@@ -71,7 +71,6 @@ export default function GitHubActivity() {
   const recent = useMemo(() => (days ?? []).slice(-RECENT_DAYS), [days]);
   const weeks = useMemo(() => buildWeeks(recent), [recent]);
   const monthLabels = useMemo(() => buildMonthLabels(weeks), [weeks]);
-  const recentTotal = recent.reduce((sum, day) => sum + day.count, 0);
 
   return (
     <section id="github" className="section">
@@ -100,9 +99,6 @@ export default function GitHubActivity() {
           <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
             <p className="mono text-sm text-[color:var(--color-muted)]">
               近一年贡献 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{total}</span> 次
-            </p>
-            <p className="mono text-sm text-[color:var(--color-muted)]">
-              近10个月 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{recentTotal}</span> 次
             </p>
           </div>
 
