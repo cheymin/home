@@ -1,17 +1,35 @@
+const prefs = [
+  { k: "颜色偏好", v: "极简 · 浅蓝色" },
+  { k: "音乐", v: "轻音乐" },
+  { k: "游戏", v: "Minecraft（唯一）" },
+  { k: "动漫角色", v: "甘城猫猫 · 伊雷娜" },
+];
+
 export default function Hobbies() {
   return (
     <section id="hobbies" className="section">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-4" data-reveal="left">
           <div>
-            <p className="eyebrow">HOBBIES</p>
+            <p className="eyebrow">HOBBIES &amp; PREFERENCES</p>
             <h2 className="h-title mt-3">
               爱好与<span className="accent">偏好</span>
             </h2>
           </div>
+          <p className="lead max-w-md">喜欢什么、不喜欢什么，都在这儿了。</p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-12">
+        {/* 偏好速览 */}
+        <div className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4">
+          {prefs.map((pref, index) => (
+            <div key={pref.k} className={`card d${index} !p-8`} data-reveal="scale">
+              <p className="eyebrow">{pref.k}</p>
+              <p className="mt-3 text-lg font-bold leading-snug">{pref.v}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-12">
           {/* 音乐：整卡可点，进入 music.cheymin.top */}
           <a
             href="https://music.cheymin.top"
@@ -63,8 +81,8 @@ export default function Hobbies() {
             </div>
           </div>
 
-          {/* 关注偏好 */}
-          <div className="card d0 flex flex-col justify-center lg:col-span-12" data-reveal>
+          {/* 关注方向 */}
+          <div className="card d2 flex flex-col justify-center lg:col-span-12" data-reveal>
             <p className="eyebrow">关注偏好</p>
             <p className="mt-2 text-2xl font-extrabold">数码科技</p>
             <div className="mt-4 flex flex-wrap gap-2.5">

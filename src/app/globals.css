@@ -492,3 +492,40 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   border-color: var(--color-border-accent);
   transform: translateY(-3px);
 }
+
+/* ===== Hero 问候语（正常字号） ===== */
+.hero__hello {
+  margin-bottom: 10px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--color-muted);
+}
+
+/* ===== GitHub 贡献日历 ===== */
+.cal { overflow-x: auto; padding-bottom: 4px }
+.cal__track { min-width: 720px }
+.cal__months { display: flex; gap: 4px; margin-bottom: 8px }
+.cal__months > span {
+  flex: 1 1 0;
+  min-width: 0;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--color-dim);
+  white-space: nowrap;
+}
+.cal__weeks { display: flex; gap: 4px }
+.cal__col { flex: 1 1 0; display: flex; flex-direction: column; gap: 4px }
+.cal__cell,
+.cal__key {
+  border-radius: 3px;
+  background: var(--lv, rgba(255, 255, 255, .06));
+}
+.cal__cell { width: 100%; aspect-ratio: 1 }
+.cal__cell--empty { background: transparent }
+.cal__key { width: 13px; height: 13px; flex: none }
+.lv0 { --lv: rgba(255, 255, 255, .06) }
+.lv1 { --lv: rgba(124, 196, 240, .3) }
+.lv2 { --lv: rgba(124, 196, 240, .52) }
+.lv3 { --lv: rgba(124, 196, 240, .74) }
+.lv4 { --lv: #7cc4f0 }

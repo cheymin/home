@@ -6,8 +6,9 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Journey from "./components/Journey";
-import Preferences from "./components/Preferences";
+import GitHubActivity from "./components/GitHubActivity";
 import Hobbies from "./components/Hobbies";
+import BlogPosts from "./components/BlogPosts";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -30,8 +31,9 @@ export default function Home() {
         <About />
         <Skills />
         <Journey />
-        <Preferences />
+        <GitHubActivity />
         <Hobbies />
+        <BlogPosts />
       </main>
 
       <Footer />

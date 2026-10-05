@@ -1,5 +1,5 @@
-const EMAIL = "1@346247.xyz";
 const BLOG = "https://blog.cheymin.top";
+const GITHUB = "https://github.com/cheymin";
 
 export default function Hero() {
   return (
@@ -8,7 +8,7 @@ export default function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-12">
           {/* 左：介绍 */}
           <div className="lg:col-span-7" data-reveal="left">
-            <p className="eyebrow">HELLO, WORLD · 中国 · 重庆市北碚区</p>
+            <p className="hero__hello">你好！我是</p>
 
             <h1 className="hero__name name-art">Cheymin</h1>
 
@@ -25,18 +25,16 @@ export default function Hero() {
                   <path d="M7 17 17 7M9 7h8v8" />
                 </svg>
               </a>
-              <a href={`mailto:${EMAIL}`} className="btn btn--glass">
+              <a href="#contact" className="btn btn--glass">
                 联系我
               </a>
-              <a href="#about" className="btn btn--glass">
-                认识一下我
+              <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="btn btn--glass">
+                GitHub 主页
               </a>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-2.5">
-              <span className="chip chip--accent">埋头苦干，沉默是金</span>
-              <span className="chip">自托管服务</span>
-              <span className="chip">浅蓝色</span>
+              <span className="chip chip--accent">座右铭：埋头苦干，沉默是金</span>
             </div>
           </div>
 
