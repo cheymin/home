@@ -100,9 +100,9 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   border-radius: 22px;
   border: 1px solid transparent;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .01));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+    linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015));
+  backdrop-filter: blur(30px) saturate(1.25);
+  -webkit-backdrop-filter: blur(30px) saturate(1.25);
   padding: 32px;
   transition: border-color .35s ease, transform .35s cubic-bezier(.16, 1, .3, 1), box-shadow .35s ease;
 }
@@ -365,4 +365,112 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   .marquee { animation: none }
   .rotator > span { animation: none }
   .progress > i { transition: none }
+  .avatar-ring::before { animation: none }
+}
+
+/* ===== 随机背景图 + 玻璃模糊 ===== */
+.bg-photo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url("https://api.yppp.net/api.php");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(9px) saturate(1.2) brightness(.85);
+  transform: scale(1.1);
+}
+.bg-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(120% 85% at 50% 0%, rgba(7, 11, 16, .38), rgba(7, 11, 16, .84) 70%),
+    linear-gradient(180deg, rgba(7, 11, 16, .55), rgba(7, 11, 16, .9));
+}
+
+/* ===== Hero：无边框，铺在背景图上，名字最大 ===== */
+.hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding-block: 146px 84px;
+}
+@media (min-width: 768px) { .hero { padding-block: 186px 116px } }
+.hero__inner { width: 100% }
+.hero__head { display: flex; align-items: center; gap: 26px; flex-wrap: wrap }
+.hero__name {
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -.01em;
+  font-size: clamp(3.4rem, 12.5vw, 9.5rem);
+}
+.hero__tag { margin-top: 12px; color: var(--color-muted); font-size: 1.05rem }
+.hero__desc { margin-top: 26px; max-width: 44rem; color: var(--color-muted); font-size: 1.16rem }
+
+/* Google 风头像：外圈渐变光环持续旋转 */
+.avatar-ring { position: relative; width: 116px; height: 116px; flex: none }
+.avatar-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #7cc4f0, #8be0c4, #a78bfa, #f0abfc, #7cc4f0);
+  animation: av-spin 6s linear infinite;
+}
+.avatar-ring::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: rgba(7, 11, 16, .92);
+}
+.avatar-ring img {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 1;
+}
+@keyframes av-spin { to { transform: rotate(360deg) } }
+@media (min-width: 768px) { .avatar-ring { width: 140px; height: 140px } }
+
+/* ===== 更多玻璃模糊 ===== */
+.nav {
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+}
+.chip {
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+.btn--glass {
+  background: rgba(255, 255, 255, .07);
+  border-color: rgba(255, 255, 255, .16);
+  color: var(--color-text);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+}
+.btn--glass:hover { border-color: var(--color-border-accent); color: var(--color-accent) }
+
+/* ===== 联系图标 ===== */
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .05);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  color: var(--color-muted);
+  transition: color .3s ease, border-color .3s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.contact-icon:hover {
+  color: var(--color-accent);
+  border-color: var(--color-border-accent);
+  transform: translateY(-3px);
 }

@@ -14,7 +14,7 @@ const artScript = Dancing_Script({
 export const metadata: Metadata = {
   metadataBase: new URL("https://blog.cheymin.top"),
   title: { default: "Cheyminの主页", template: "%s | Cheyminの主页" },
-  description: "你好，很高兴认识你👋 我叫 Cheymin，一名苦逼初中生。埋头苦干，沉默是金。",
+  description: "你好，很高兴认识你。我叫 Cheymin，一名苦逼初中生。埋头苦干，沉默是金。",
   keywords: ["Cheymin", "自托管", "Homelab", "刷机", "折腾", "博客"],
   openGraph: {
     title: "Cheyminの主页",

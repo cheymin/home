@@ -16,7 +16,7 @@ export default function About() {
               关于<span className="accent">我</span>
             </h2>
           </div>
-          <p className="lead max-w-md">你好，很高兴认识你 👋</p>
+          <p className="lead max-w-md">你好，很高兴认识你。</p>
         </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-12">

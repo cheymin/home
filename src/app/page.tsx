@@ -13,6 +13,8 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <InitialLoader>
+      <div className="bg-photo" aria-hidden />
+      <div className="bg-veil" aria-hidden />
       <ScrollFX />
       <Reveal />
 
