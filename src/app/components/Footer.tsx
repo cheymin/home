@@ -1,43 +1,73 @@
+const EMAIL = "1@346247.xyz";
+
+const contacts = [
+  { label: "GitHub", href: "https://github.com/cheymin" },
+  { label: "哔哩哔哩", href: "https://space.bilibili.com/3493142112242314" },
+  { label: "QQ", href: "https://qm.qq.com/q/haBHejhGnu" },
+  { label: "X (Twitter)", href: "https://x.com/mindjkl" },
+];
+
 export default function Footer() {
   return (
-    <footer className="pt-24 pb-10 mt-10 border-t" style={{ borderColor: "var(--color-border)" }}>
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 pb-14 border-b" style={{ borderColor: "var(--color-border)" }}>
-          <div className="max-w-xl">
-            <p className="section-eyebrow">blog.cheymin.top</p>
-            <h2 className="font-extrabold tracking-tight" style={{ fontSize: "clamp(1.75rem, 4.5vw, 2.75rem)", lineHeight: 1.15 }}>
-              欢迎来<span className="logo-accent">博客找我玩</span>。
-            </h2>
-            <p className="mt-4 text-[color:var(--color-muted)]">
-              埋头苦干，沉默是金。
-            </p>
+    <footer id="contact" className="section" style={{ paddingBottom: 40 }}>
+      <div className="shell">
+        <div className="card card--accent card--pad-lg d0" data-reveal="scale">
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <p className="eyebrow">CONTACT</p>
+              <h2 className="h-title mt-3">
+                联系<span className="accent">我</span>
+              </h2>
+              <p className="lead mt-4 max-w-lg">
+                想交流技术、问点问题，或者只是想打个招呼，都欢迎来信。邮件是最快能找到我的方式。
+              </p>
+
+              <a
+                href={`mailto:${EMAIL}`}
+                className="btn btn--primary mt-7 !px-6 !py-3 !text-base"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+                  <path d="m3 6.5 9 6 9-6" />
+                </svg>
+                {EMAIL}
+              </a>
+
+              <p className="mono mt-4 text-xs text-[color:var(--color-dim)]">邮箱为主，其次可以来这些地方找我</p>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-3">
+                {contacts.map((c) => (
+                  <a
+                    key={c.label}
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="chip !justify-center !py-3 !text-sm"
+                  >
+                    {c.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-          <a href="https://blog.cheymin.top" target="_blank" rel="noopener noreferrer" className="btn-contained self-start md:self-auto">
-            访问博客 →
-          </a>
-        </div>
 
-        <div className="flex flex-col-reverse md:flex-row md:items-center justify-between gap-4 pt-6">
-          <p className="terminal-mono text-sm text-[color:var(--color-dim)]">
-            © {new Date().getFullYear()} Cheymin · 中国 · 重庆市北碚区
-          </p>
-
-          <div className="flex gap-2">
-            <a href="https://blog.cheymin.top" target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="博客" title="博客">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/>
-              </svg>
-            </a>
-            <a href="https://blog.cheymin.top/about" target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="关于" title="关于">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>
-              </svg>
-            </a>
-            <a href="#top" className="icon-btn" aria-label="回到顶部" title="回到顶部">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 19V5M5 12l7-7 7 7"/>
-              </svg>
-            </a>
+          <div
+            className="mono mt-10 flex flex-col gap-4 border-t pt-6 text-sm text-[color:var(--color-dim)] sm:flex-row sm:items-center sm:justify-between"
+            style={{ borderColor: "var(--color-border)" }}
+          >
+            <p>
+              © {new Date().getFullYear()} Cheymin<span className="accent">の</span>主页 · 中国 · 重庆市北碚区
+            </p>
+            <div className="flex gap-4">
+              <a href={`mailto:${EMAIL}`} className="hover:text-[color:var(--color-accent)]">
+                邮箱
+              </a>
+              <a href="#top" className="hover:text-[color:var(--color-accent)]">
+                回到顶部
+              </a>
+            </div>
           </div>
         </div>
       </div>
