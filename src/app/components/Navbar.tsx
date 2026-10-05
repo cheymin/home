@@ -12,16 +12,42 @@ const items = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
+    let last = window.scrollY;
+    let raf = 0;
+
+    const apply = () => {
+      raf = 0;
+      const y = window.scrollY;
+      setScrolled(y > 8);
+
+      const delta = y - last;
+      if (y < 80) {
+        setHidden(false);
+      } else if (delta > 4) {
+        setHidden(true);
+      } else if (delta < -4) {
+        setHidden(false);
+      }
+      last = y;
+    };
+
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    apply();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
-    <header className={`nav${scrolled ? " is-scrolled" : ""}`}>
+    <header className={`nav${scrolled ? " is-scrolled" : ""}${hidden ? " is-hidden" : ""}`}>
       <div className="shell flex w-full items-center gap-4">
         <a href="#top" className="flex items-baseline gap-[3px] font-bold leading-none">
           <span className="name-art text-[26px]">Cheymin</span>

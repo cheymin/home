@@ -185,13 +185,17 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   height: 64px;
   display: flex; align-items: center;
   border-bottom: 1px solid transparent;
-  transition: background .3s, border-color .3s, backdrop-filter .3s;
+  transition: background .3s, border-color .3s, backdrop-filter .3s, transform .42s cubic-bezier(.22, .61, .36, 1);
 }
 .nav.is-scrolled {
   background: rgba(7, 11, 16, .78);
   border-bottom-color: var(--color-border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+.nav.is-hidden {
+  transform: translateY(-110%);
+  pointer-events: none;
 }
 .nav-link {
   font-size: .875rem; font-weight: 600;
