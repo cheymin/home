@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 type Day = { date: string; count: number; level: number };
 
-const MONTHS = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+const RECENT_DAYS = 31;
 
 function buildWeeks(days: Day[]) {
   if (days.length === 0) return [] as (Day | null)[][];
@@ -31,10 +31,6 @@ function buildWeeks(days: Day[]) {
   return weeks;
 }
 
-function monthOf(day: Day | null | undefined) {
-  return day ? new Date(`${day.date}T00:00:00Z`).getUTCMonth() : -1;
-}
-
 export default function GitHubActivity() {
   const [days, setDays] = useState<Day[] | null>(null);
   const [total, setTotal] = useState(0);
@@ -56,8 +52,9 @@ export default function GitHubActivity() {
     };
   }, []);
 
-  const weeks = useMemo(() => buildWeeks(days ?? []), [days]);
-  const activeDays = (days ?? []).filter((day) => day.count > 0).length;
+  const recent = useMemo(() => (days ?? []).slice(-RECENT_DAYS), [days]);
+  const weeks = useMemo(() => buildWeeks(recent), [recent]);
+  const monthTotal = recent.reduce((sum, day) => sum + day.count, 0);
 
   return (
     <section id="github" className="section">
@@ -88,7 +85,7 @@ export default function GitHubActivity() {
               近一年贡献 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{total}</span> 次
             </p>
             <p className="mono text-sm text-[color:var(--color-muted)]">
-              活跃 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{activeDays}</span> 天
+              近一月 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{monthTotal}</span> 次
             </p>
           </div>
 
@@ -99,43 +96,28 @@ export default function GitHubActivity() {
           )}
 
           {weeks.length > 0 && (
-            <>
-              <div className="cal mt-8">
-                <div className="cal__track">
-                  <div className="cal__months">
-                    {weeks.map((week, index) => {
-                      const current = week.find(Boolean) ?? null;
-                      const previous = index > 0 ? weeks[index - 1].find(Boolean) ?? null : null;
-                      const changed = monthOf(current) !== monthOf(previous);
-                      return (
-                        <span key={current?.date ?? `m${index}`}>
-                          {changed && monthOf(current) >= 0 ? MONTHS[monthOf(current)] : ""}
-                        </span>
-                      );
-                    })}
-                  </div>
-
-                  <div className="cal__weeks">
-                    {weeks.map((week, index) => (
-                      <div key={`w${index}`} className="cal__col">
-                        {week.map((day, dayIndex) =>
-                          day ? (
-                            <span
-                              key={day.date}
-                              className={`cal__cell lv${day.level}`}
-                              title={`${day.date} · ${day.count} 次贡献`}
-                            />
-                          ) : (
-                            <span key={`e${dayIndex}`} className="cal__cell cal__cell--empty" />
-                          )
-                        )}
-                      </div>
-                    ))}
-                  </div>
+            <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
+              <div className="cal">
+                <div className="cal__weeks">
+                  {weeks.map((week, index) => (
+                    <div key={`w${index}`} className="cal__col">
+                      {week.map((day, dayIndex) =>
+                        day ? (
+                          <span
+                            key={day.date}
+                            className={`cal__cell lv${day.level}`}
+                            title={`${day.date} · ${day.count} 次贡献`}
+                          />
+                        ) : (
+                          <span key={`e${dayIndex}`} className="cal__cell cal__cell--empty" />
+                        )
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              <div className="mt-5 flex items-center justify-end gap-2 text-xs text-[color:var(--color-dim)]">
+              <div className="flex items-center gap-2 text-xs text-[color:var(--color-dim)]">
                 <span>少</span>
                 <span className="cal__key lv1" />
                 <span className="cal__key lv2" />
@@ -143,7 +125,7 @@ export default function GitHubActivity() {
                 <span className="cal__key lv4" />
                 <span>多</span>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>
