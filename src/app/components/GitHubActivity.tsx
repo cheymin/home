@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 type Day = { date: string; count: number; level: number };
 
-const RECENT_DAYS = 31;
+const RECENT_DAYS = 300; // 约 10 个月
 
 function buildWeeks(days: Day[]) {
   if (days.length === 0) return [] as (Day | null)[][];
@@ -31,6 +31,22 @@ function buildWeeks(days: Day[]) {
   return weeks;
 }
 
+/** 每个月的第一周标记月份，作为日历顶部的“小日期”。 */
+function buildMonthLabels(weeks: (Day | null)[][]) {
+  const labels: (string | null)[] = weeks.map(() => null);
+  let lastMonth = -1;
+  weeks.forEach((week, index) => {
+    const first = week.find((day): day is Day => day !== null);
+    if (!first) return;
+    const month = new Date(`${first.date}T00:00:00Z`).getUTCMonth();
+    if (month !== lastMonth) {
+      labels[index] = `${month + 1}月`;
+      lastMonth = month;
+    }
+  });
+  return labels;
+}
+
 export default function GitHubActivity() {
   const [days, setDays] = useState<Day[] | null>(null);
   const [total, setTotal] = useState(0);
@@ -54,7 +70,8 @@ export default function GitHubActivity() {
 
   const recent = useMemo(() => (days ?? []).slice(-RECENT_DAYS), [days]);
   const weeks = useMemo(() => buildWeeks(recent), [recent]);
-  const monthTotal = recent.reduce((sum, day) => sum + day.count, 0);
+  const monthLabels = useMemo(() => buildMonthLabels(weeks), [weeks]);
+  const recentTotal = recent.reduce((sum, day) => sum + day.count, 0);
 
   return (
     <section id="github" className="section">
@@ -85,7 +102,7 @@ export default function GitHubActivity() {
               近一年贡献 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{total}</span> 次
             </p>
             <p className="mono text-sm text-[color:var(--color-muted)]">
-              近一月 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{monthTotal}</span> 次
+              近10个月 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{recentTotal}</span> 次
             </p>
           </div>
 
@@ -98,22 +115,31 @@ export default function GitHubActivity() {
           {weeks.length > 0 && (
             <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
               <div className="cal">
-                <div className="cal__weeks">
-                  {weeks.map((week, index) => (
-                    <div key={`w${index}`} className="cal__col">
-                      {week.map((day, dayIndex) =>
-                        day ? (
-                          <span
-                            key={day.date}
-                            className={`cal__cell lv${day.level}`}
-                            title={`${day.date} · ${day.count} 次贡献`}
-                          />
-                        ) : (
-                          <span key={`e${dayIndex}`} className="cal__cell cal__cell--empty" />
-                        )
-                      )}
-                    </div>
-                  ))}
+                <div className="cal__inner">
+                  <div className="cal__labels">
+                    {monthLabels.map((label, index) => (
+                      <span key={`l${index}`} className="cal__label">
+                        {label ?? ""}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="cal__weeks">
+                    {weeks.map((week, index) => (
+                      <div key={`w${index}`} className="cal__col">
+                        {week.map((day, dayIndex) =>
+                          day ? (
+                            <span
+                              key={day.date}
+                              className={`cal__cell lv${day.level}`}
+                              title={`${day.date} · ${day.count} 次贡献`}
+                            />
+                          ) : (
+                            <span key={`e${dayIndex}`} className="cal__cell cal__cell--empty" />
+                          )
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 

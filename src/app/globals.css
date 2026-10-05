@@ -91,8 +91,8 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
 
 /* ===== 布局 ===== */
 .shell { width: 100%; max-width: 1720px; margin-inline: auto; padding-inline: clamp(20px, 4.5vw, 80px) }
-.section { position: relative; z-index: 1; padding-block: 88px }
-@media (min-width: 768px) { .section { padding-block: 132px } }
+.section { position: relative; z-index: 1; padding-block: 60px }
+@media (min-width: 768px) { .section { padding-block: 88px } }
 
 /* ===== 卡片 / 玻璃质感 ===== */
 .card {
@@ -502,8 +502,19 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   color: var(--color-muted);
 }
 
-/* ===== GitHub 贡献日历（近一月，紧凑） ===== */
+/* ===== GitHub 贡献日历（近10个月，紧凑） ===== */
 .cal { overflow-x: auto; padding-bottom: 2px }
+.cal__inner { display: inline-flex; flex-direction: column; gap: 6px }
+.cal__labels { display: flex; gap: 4px; height: 13px }
+.cal__label {
+  width: 15px;
+  flex: none;
+  position: relative;
+  font-size: 10px;
+  line-height: 13px;
+  color: var(--color-dim);
+  white-space: nowrap;
+}
 .cal__weeks { display: flex; gap: 4px }
 .cal__col { display: flex; flex-direction: column; gap: 4px }
 .cal__cell,

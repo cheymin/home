@@ -73,7 +73,7 @@ export default function BlogPosts() {
               <h3 className="mt-3 text-lg font-bold leading-snug transition-colors group-hover:text-[color:var(--color-accent)]">
                 {post.title}
               </h3>
-              <p className="lead mt-3 flex-1 text-sm">{post.excerpt}…</p>
+              {post.excerpt && <p className="lead mt-3 flex-1 text-sm">{post.excerpt}…</p>}
               <span className="mt-5 inline-flex items-center gap-2 text-sm text-[color:var(--color-accent)]">
                 阅读全文
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
