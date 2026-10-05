@@ -412,7 +412,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   letter-spacing: -.01em;
   font-size: clamp(3.4rem, 12.5vw, 9.5rem);
 }
-.hero__tag { margin-top: 12px; color: var(--color-muted); font-size: 1.05rem }
+.hero__tag { margin-top: 26px; color: var(--color-muted); font-size: 1.05rem }
 .hero__desc { margin-top: 26px; max-width: 44rem; color: var(--color-muted); font-size: 1.16rem }
 
 /* Google 风头像：外圈渐变光环持续旋转 + 扩散脉冲 */

@@ -71,6 +71,7 @@ export default function GitHubActivity() {
   const recent = useMemo(() => (days ?? []).slice(-RECENT_DAYS), [days]);
   const weeks = useMemo(() => buildWeeks(recent), [recent]);
   const monthLabels = useMemo(() => buildMonthLabels(weeks), [weeks]);
+  const activeDays = useMemo(() => recent.filter((day) => day.count > 0).length, [recent]);
 
   return (
     <section id="github" className="section">
@@ -99,6 +100,9 @@ export default function GitHubActivity() {
           <div className="flex flex-wrap items-baseline gap-x-8 gap-y-3">
             <p className="mono text-sm text-[color:var(--color-muted)]">
               近一年贡献 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{total}</span> 次
+            </p>
+            <p className="mono text-sm text-[color:var(--color-muted)]">
+              活跃 <span className="text-2xl font-bold text-[color:var(--color-accent)]">{activeDays}</span> 天
             </p>
           </div>
 
