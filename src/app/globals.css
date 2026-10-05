@@ -366,6 +366,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
   .rotator > span { animation: none }
   .progress > i { transition: none }
   .avatar-ring::before { animation: none }
+  .avatar-ring .pulse { animation: none }
 }
 
 /* ===== 随机背景图 + 玻璃模糊 ===== */
@@ -410,32 +411,45 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
 .hero__tag { margin-top: 12px; color: var(--color-muted); font-size: 1.05rem }
 .hero__desc { margin-top: 26px; max-width: 44rem; color: var(--color-muted); font-size: 1.16rem }
 
-/* Google 风头像：外圈渐变光环持续旋转 */
-.avatar-ring { position: relative; width: 116px; height: 116px; flex: none }
+/* Google 风头像：外圈渐变光环持续旋转 + 扩散脉冲 */
+.avatar-ring { position: relative; width: 208px; height: 208px; flex: none }
 .avatar-ring::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: conic-gradient(from 0deg, #7cc4f0, #8be0c4, #a78bfa, #f0abfc, #7cc4f0);
-  animation: av-spin 6s linear infinite;
+  animation: av-spin 5.5s linear infinite;
+  filter: drop-shadow(0 0 26px rgba(124, 196, 240, .45));
 }
 .avatar-ring::after {
   content: "";
   position: absolute;
-  inset: 4px;
+  inset: 9px;
   border-radius: 50%;
-  background: rgba(7, 11, 16, .92);
+  background: rgba(7, 11, 16, .94);
 }
 .avatar-ring img {
   position: absolute;
-  inset: 8px;
+  inset: 16px;
   border-radius: 50%;
   object-fit: cover;
   z-index: 1;
 }
+.avatar-ring .pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(124, 196, 240, .55);
+  animation: av-pulse 3.2s cubic-bezier(.22, .61, .36, 1) infinite;
+}
 @keyframes av-spin { to { transform: rotate(360deg) } }
-@media (min-width: 768px) { .avatar-ring { width: 140px; height: 140px } }
+@keyframes av-pulse {
+  0%   { transform: scale(1); opacity: .7 }
+  100% { transform: scale(1.22); opacity: 0 }
+}
+@media (min-width: 768px) { .avatar-ring { width: 252px; height: 252px } }
+@media (min-width: 1280px) { .avatar-ring { width: 292px; height: 292px } }
 
 /* ===== 更多玻璃模糊 ===== */
 .nav {
