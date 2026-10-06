@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react";
 
 const ENV_ID = "https://twikoo.346247.xyz/.netlify/functions/twikoo";
-const SCRIPT = "https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js";
+// 与博客保持一致：同版本、同 CDN（jsdmirror 国内访问更稳），all 包自带依赖
+const SCRIPT = "https://cdn.jsdmirror.com/npm/twikoo@1.7.20/dist/twikoo.all.min.js";
 
 declare global {
   interface Window {
