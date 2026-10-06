@@ -540,3 +540,126 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 10px; height: 10px }
 .lv2 { --lv: rgba(124, 196, 240, .52) }
 .lv3 { --lv: rgba(124, 196, 240, .74) }
 .lv4 { --lv: #7cc4f0 }
+
+/* ===== 自建服务导航 ===== */
+.svc-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: rgba(124, 196, 240, .1);
+  color: var(--color-accent);
+  transition: border-color .3s, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.card-link:hover .svc-icon { border-color: var(--color-border-accent); transform: translateY(-2px) }
+
+/* ===== 友链 ===== */
+.friend-avatar {
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color .3s;
+}
+.card-link:hover .friend-avatar { border-color: var(--color-border-accent) }
+
+/* ===== 最近动态时间线 ===== */
+.talk-list { position: relative; display: flex; flex-direction: column; gap: 18px; padding-left: 26px }
+.talk-list::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--color-border) 12%, var(--color-border) 88%, transparent);
+}
+.talk { position: relative }
+.talk__dot {
+  position: absolute;
+  left: -26px;
+  top: 24px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--color-bg);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-border-accent);
+}
+.talk__body { padding: 22px 26px }
+
+/* ===== 主题切换按钮 ===== */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-left: 4px;
+  flex: none;
+  border-radius: 11px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-muted);
+  transition: color .25s, border-color .25s, transform .2s;
+}
+.theme-toggle:hover { color: var(--color-accent); border-color: var(--color-border-accent); transform: translateY(-1px) }
+.theme-toggle:active { transform: scale(.96) }
+
+/* ===== 浅色主题 ===== */
+html[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #eef2f7;
+  --color-bg-soft: #e7edf4;
+  --color-surface: #ffffff;
+  --color-surface-2: rgba(12, 28, 44, .04);
+  --color-text: #14212d;
+  --color-muted: #4a5c6d;
+  --color-dim: #76889a;
+  --color-accent: #2580c4;
+  --color-accent-soft: #4a9bd6;
+  --color-accent-ink: #ffffff;
+  --color-border: rgba(12, 28, 44, .13);
+  --color-border-accent: rgba(37, 128, 196, .38);
+}
+html[data-theme="light"] ::selection { color: #fff; background: var(--color-accent) }
+html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(37, 128, 196, .3); border-color: var(--color-bg) }
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(37, 128, 196, .5) }
+html[data-theme="light"] .card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .74));
+  box-shadow: 0 16px 40px -30px rgba(15, 34, 52, .5);
+}
+html[data-theme="light"] .card:hover {
+  box-shadow: 0 18px 44px -26px rgba(15, 34, 52, .4), 0 0 0 1px rgba(37, 128, 196, .1) inset;
+}
+html[data-theme="light"] .card--accent {
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(37, 128, 196, .14), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, .95), rgba(255, 255, 255, .8));
+}
+html[data-theme="light"] .nav.is-scrolled { background: rgba(238, 242, 247, .82) }
+html[data-theme="light"] .btn--glass { background: rgba(12, 28, 44, .05); border-color: rgba(12, 28, 44, .14) }
+html[data-theme="light"] .contact-icon { border-color: rgba(12, 28, 44, .12); background: rgba(12, 28, 44, .05) }
+html[data-theme="light"] .chip--accent { background: rgba(37, 128, 196, .12) }
+html[data-theme="light"] .loader__bar { background: rgba(12, 28, 44, .1) }
+html[data-theme="light"] .avatar-ring::after { background: rgba(238, 242, 247, .94) }
+html[data-theme="light"] .ambient::before,
+html[data-theme="light"] .ambient::after { opacity: .32 }
+html[data-theme="light"] .bg-photo { filter: blur(9px) saturate(1.15) brightness(1.08) }
+html[data-theme="light"] .bg-veil {
+  background:
+    radial-gradient(120% 85% at 50% 0%, rgba(238, 242, 247, .55), rgba(238, 242, 247, .88) 70%),
+    linear-gradient(180deg, rgba(238, 242, 247, .6), rgba(238, 242, 247, .92));
+}
+html[data-theme="light"] .cal__cell,
+html[data-theme="light"] .cal__key { --lv: rgba(12, 28, 44, .07) }
+html[data-theme="light"] .lv0 { --lv: rgba(12, 28, 44, .07) }
+html[data-theme="light"] .lv1 { --lv: rgba(37, 128, 196, .28) }
+html[data-theme="light"] .lv2 { --lv: rgba(37, 128, 196, .5) }
+html[data-theme="light"] .lv3 { --lv: rgba(37, 128, 196, .72) }
+html[data-theme="light"] .lv4 { --lv: #2580c4 }

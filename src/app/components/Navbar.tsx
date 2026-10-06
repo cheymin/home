@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const items = [
   { href: "#about", label: "关于" },
   { href: "#skills", label: "技能" },
   { href: "#journey", label: "生涯" },
-  { href: "#preferences", label: "偏好" },
-  { href: "#hobbies", label: "爱好" },
+  { href: "#services", label: "服务" },
+  { href: "#talks", label: "动态" },
+  { href: "#blog", label: "博文" },
+  { href: "#friends", label: "友链" },
 ];
 
 export default function Navbar() {
@@ -64,6 +67,8 @@ export default function Navbar() {
             </a>
           ))}
         </nav>
+
+        <ThemeToggle />
 
         <a href="#contact" className="btn btn--primary ml-2 !px-4 !py-2">
           联系我

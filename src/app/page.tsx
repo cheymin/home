@@ -6,9 +6,13 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Journey from "./components/Journey";
+import Services from "./components/Services";
 import GitHubActivity from "./components/GitHubActivity";
 import Hobbies from "./components/Hobbies";
+import Talks from "./components/Talks";
 import BlogPosts from "./components/BlogPosts";
+import Friends from "./components/Friends";
+import Guestbook from "./components/Guestbook";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -31,9 +35,13 @@ export default function Home() {
         <About />
         <Skills />
         <Journey />
+        <Services />
         <GitHubActivity />
         <Hobbies />
+        <Talks />
         <BlogPosts />
+        <Friends />
+        <Guestbook />
       </main>
 
       <Footer />

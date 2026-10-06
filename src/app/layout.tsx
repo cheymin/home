@@ -31,7 +31,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-CN" className={`${geistSans.variable} ${geistMono.variable} ${artScript.variable}`}>
+    <html
+      lang="zh-CN"
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${artScript.variable}`}
+    >
+      <head>
+        {/* 首屏前定好主题，避免明暗切换闪烁 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme')||'dark';document.documentElement.dataset.theme=t==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}",
+          }}
+        />
+      </head>
       <body>
         <noscript>
           <style>{`[data-reveal]{opacity:1 !important;transform:none !important}.loader{display:none !important}`}</style>
