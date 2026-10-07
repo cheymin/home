@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-const ENV_ID = "https://twikoo.346247.xyz/.netlify/functions/twikoo";
+// 走后端同源代理（/api/twikoo），避免浏览器跨域；路径必须是绝对 URL 才会被识别为 HTTP 模式
+const ENV_PATH = "/api/twikoo";
 // 后端已升级至 Twikoo 2.x，前端使用同版本；jsdmirror CDN 国内访问更稳，all 包自带依赖
 const SCRIPT = "https://cdn.jsdmirror.com/npm/twikoo@2.0.12/dist/twikoo.all.min.js";
 
@@ -24,7 +25,9 @@ export default function Guestbook() {
     let cancelled = false;
     const boot = () => {
       if (cancelled || !window.twikoo) return;
-      window.twikoo.init({ envId: ENV_ID, el, path: "/guestbook" }).catch(() => {});
+      window.twikoo
+        .init({ envId: `${window.location.origin}${ENV_PATH}`, el, path: "/guestbook" })
+        .catch(() => {});
     };
 
     if (window.twikoo) {
