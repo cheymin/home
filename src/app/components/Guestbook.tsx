@@ -3,12 +3,14 @@
 import { useEffect, useRef } from "react";
 
 const ENV_ID = "https://twikoo.346247.xyz/.netlify/functions/twikoo";
-// 与博客保持一致：同版本、同 CDN（jsdmirror 国内访问更稳），all 包自带依赖
-const SCRIPT = "https://cdn.jsdmirror.com/npm/twikoo@1.7.20/dist/twikoo.all.min.js";
+// 后端已升级至 Twikoo 2.x，前端使用同版本；jsdmirror CDN 国内访问更稳，all 包自带依赖
+const SCRIPT = "https://cdn.jsdmirror.com/npm/twikoo@2.0.12/dist/twikoo.all.min.js";
 
 declare global {
   interface Window {
-    twikoo?: { init: (options: { envId: string; el: HTMLElement }) => Promise<void> };
+    twikoo?: {
+      init: (options: { envId: string; el: HTMLElement; path?: string }) => Promise<void>;
+    };
   }
 }
 
@@ -22,7 +24,7 @@ export default function Guestbook() {
     let cancelled = false;
     const boot = () => {
       if (cancelled || !window.twikoo) return;
-      window.twikoo.init({ envId: ENV_ID, el }).catch(() => {});
+      window.twikoo.init({ envId: ENV_ID, el, path: "/guestbook" }).catch(() => {});
     };
 
     if (window.twikoo) {
